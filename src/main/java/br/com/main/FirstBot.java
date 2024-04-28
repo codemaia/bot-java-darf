@@ -19,13 +19,38 @@ public class FirstBot extends DesktopBot implements RunnableAgent
 	public void action(BotExecution botExecution) {
 
 		try {
-			// To open a web page
-			browse("https://www.botcity.dev");
-			
+
 			// To exec an application (Windows)
-			// exec("calc.exe");
- 
+			exec("C:\\Program Files (x86)\\Programas RFB\\Sicalc Auto Atendimento\\SicalcAA.exe");
+			
+			if(!find( "clickContinue", 0.97, 10000)) {
+				notFound("clickContinue");
+				return;
+			}
+			click();
+			
+			if(!find("clickFuncoes", 0.97, 10000)) {	notFound("clickFuncoes");	return;}
+			click();
+
+			if(!find("clickPreenchimentoDarf", 0.97, 10000)) {	notFound("clickPreenchimentoDarf");	return;}
+			click();			
+			
+			
+
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void load() {
+		try {
+			
+			addImage("clickContinue", "./src/resources/clickContinue.png");
+			addImage("clickFuncoes", "./src/resources/clickFuncoes.png");
+			addImage("clickPreenchimentoDarf", "./src/resources/clickFuncoes.png");
+					
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -38,4 +63,4 @@ public class FirstBot extends DesktopBot implements RunnableAgent
 		BotExecutor.run(new FirstBot(), args);
 	}
 }
-	
+
